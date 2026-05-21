@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Game Currency UI</title><style>
+:root{--bg:#0d0f14;--panel:#171a20;--panel2:#20232b;--line:#30343e;--text:#f5f6f8;--muted:#a8aeb8;--blue:#2f63ff;--green:#00a855}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 55% -10%,#1c2029 0,#101217 38%,#08090d 100%);color:var(--text);font-family:Arial,Helvetica,sans-serif;font-weight:800;min-height:100vh;overflow-x:hidden}.rbx{width:24px;height:24px;display:inline-grid;place-items:center;border:4px solid #f1f3f7;border-radius:7px;transform:rotate(45deg);vertical-align:-5px;margin-right:8px}.rbx:after{content:"";width:7px;height:7px;background:#f1f3f7;border-radius:1px}.rbx.sm{width:17px;height:17px;border-width:3px;border-radius:5px;vertical-align:-3px;margin-right:5px}.rbx.sm:after{width:5px;height:5px}.rbx.gold{border-color:#f7c850}.rbx.gold:after{background:#f7c850}.topbar{height:64px;background:rgba(15,17,22,.96);border-bottom:1px solid #242832;display:flex;align-items:center;gap:36px;padding:0 24px;position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}.logo{font-size:26px;font-weight:1000;letter-spacing:-1px}.nav{display:flex;gap:42px;font-size:14px;align-items:center}.search{width:430px;background:#11141a;border:1px solid #343944;color:white;border-radius:9px;padding:11px 14px;font-weight:700;outline:none;margin-left:auto}.topBalance{display:flex;align-items:center;gap:10px;background:#1d2028;border-radius:24px;padding:9px 14px;font-size:22px;font-weight:1000}.topActions{display:flex;gap:10px}.topBtn{background:#2a2e38;border:1px solid #3c424e;color:white;border-radius:10px;padding:10px 18px;font-weight:1000;cursor:pointer}.topBtn.light{background:white;color:#111}.sidebar{position:fixed;top:64px;left:0;bottom:0;width:270px;background:#111318;border-right:1px solid #252934;padding:18px 14px;z-index:10}.userBox{display:flex;gap:12px;align-items:center;padding:8px 10px 20px}.userBox img{width:48px;height:48px;border-radius:50%;object-fit:cover;background:#333}.userName{font-size:15px}.userHandle{font-size:12px;color:#a8aeb8;margin-top:4px}.sideItem{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:8px;font-size:16px;margin:3px 0}.sideItem.active,.sideItem:hover{background:#232730}.badge{margin-left:auto;background:#dfe2e8;color:#111;border-radius:999px;padding:3px 8px;font-size:12px}.premium{border:1px solid #30343e;border-radius:10px;padding:14px;margin:18px 0;font-size:13px;color:white}.premium button{width:100%;margin-top:10px;border:0;border-radius:9px;background:white;color:#111;padding:12px;font-weight:1000}.event{margin-top:20px}.eventCard{height:120px;border-radius:10px;background:linear-gradient(135deg,#0638a5,#0a1435);display:grid;place-items:center;text-align:center;font-size:20px;letter-spacing:1px}main{margin-left:270px;margin-right:330px;padding:56px 34px 80px}.heroCard{min-height:245px;border-radius:18px;background:radial-gradient(circle at 74% 35%,rgba(255,201,73,.28),transparent 22%),linear-gradient(110deg,#15181f,#0d0f14 60%,#2a2110);border:1px solid #272c36;padding:42px 44px;position:relative;overflow:hidden}.heroTitle{font-size:38px;line-height:1.1;font-weight:1000;margin:0 0 14px}.heroSub{font-size:17px;color:#d3d6dd;line-height:1.5;margin-bottom:25px}.heroBtn{background:white;color:#111;border:0;border-radius:9px;padding:13px 25px;font-size:16px;font-weight:1000}.coinArt{position:absolute;right:32px;top:35px;width:300px;height:170px;opacity:.95}.coinBig{position:absolute;right:70px;top:10px;width:120px;height:120px;border:14px solid #f0bd47;border-radius:24px;transform:rotate(45deg);box-shadow:0 0 35px rgba(255,190,60,.45)}.coinBig:after{content:"";position:absolute;inset:35px;background:#f0bd47;border-radius:5px}.coinSmall{position:absolute;background:#d79d2c;border-radius:16px;box-shadow:0 0 18px rgba(255,190,60,.35)}.c1{width:80px;height:36px;right:210px;top:90px;transform:rotate(-18deg)}.c2{width:58px;height:32px;right:8px;top:80px;transform:rotate(18deg)}.c3{width:48px;height:48px;right:220px;top:32px;transform:rotate(45deg)}.sectionTitle{font-size:24px;margin:34px 0 15px}.bonusGrid{display:grid;grid-template-columns:330px 1fr;gap:22px;align-items:stretch}.bonusCard{background:#171a20;border:1px solid #2b303a;border-radius:12px;padding:18px;display:grid;grid-template-columns:110px 1fr;gap:16px}.itemImg{height:110px;border-radius:10px;background:radial-gradient(circle,#5227ff,#141821 65%);display:grid;place-items:center;font-size:42px}.claimBtn{background:var(--green);border:0;color:white;border-radius:8px;padding:13px 20px;font-size:16px;font-weight:1000;margin-top:14px}.packageInfo{color:#c4c9d2;line-height:1.5;font-size:16px}.packages{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:18px}.pack{background:#171a20;border:1px solid #2b303a;border-radius:12px;text-align:center;padding:24px 12px}.pack .icon{height:55px;display:grid;place-items:center;margin-bottom:12px}.packAmt{font-size:23px;font-weight:1000}.more{display:inline-block;margin:8px 0;background:#30343e;border-radius:999px;padding:5px 10px;font-size:12px;color:#dfe3eb}.price{width:100%;background:var(--green);border:0;color:white;border-radius:8px;padding:12px;font-size:16px;font-weight:1000;margin-top:10px}.settings{position:fixed;right:22px;top:160px;width:290px;background:#171a20;border:1px solid #2d323c;border-radius:14px;padding:18px;z-index:8}.settings h3{margin:0 0 18px;font-size:18px}.setBlock{border-top:1px solid #2f3440;padding:18px 0}.setBlock:first-of-type{border-top:0}.setBalance{font-size:28px;font-weight:1000;margin:14px 0;display:flex;align-items:center}.setBtn{width:100%;background:#20242d;border:1px solid #454b58;color:white;border-radius:8px;padding:12px;font-weight:1000}.profilePic{text-align:center}.profilePic img{width:120px;height:120px;border-radius:50%;object-fit:cover;background:#333;margin:14px auto}.remove{color:#ff5656;text-align:center;margin-top:10px;font-size:14px}.shade{position:fixed;inset:0;background:rgba(0,0,0,.66);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}.modal{width:430px;background:#191c23;border:1px solid #353a45;border-radius:16px;box-shadow:0 25px 80px rgba(0,0,0,.75);overflow:hidden}.mh{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #2e333d}.mhTitle{font-size:18px;font-weight:1000}.mhRight{display:flex;align-items:center;gap:12px}.close{font-size:24px;cursor:pointer;color:#d7dbe3}.screen{padding:16px 18px 18px}.hidden{display:none!important}.input{width:100%;background:#12151b;border:1px solid #4f5a70;border-radius:8px;color:white;padding:13px;font-size:15px;font-weight:800;outline:none}.label{font-size:13px;color:#c3c7d0;margin:4px 0 10px}.friendsTitle{font-size:16px;margin:20px 0 10px}.resultCard{display:flex;align-items:center;gap:12px;background:#20232b;border:1px solid #383d49;border-radius:10px;padding:10px;cursor:pointer;margin-bottom:8px}.resultCard:hover{background:#292d37}.avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;background:#333}.resultName{font-size:14px}.resultHandle{font-size:12px;color:#a9afbb;margin-top:3px}.arrowCircle{margin-left:auto;width:28px;height:28px;border-radius:50%;border:1px solid #6b7280;display:grid;place-items:center}.noResults{color:#b8bec8;font-size:13px;padding:10px 0}.amountBox{display:grid;grid-template-columns:48px 1fr 48px;border:1px solid #3b414d;border-radius:10px;overflow:hidden;background:#171920;margin:16px 0 10px}.amountBox button{background:#242832;border:0;color:white;font-size:26px;font-weight:1000;cursor:pointer}.amountMain{height:72px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:38px;font-weight:1000}.amountInput{width:120px;background:transparent;border:0;color:white;font-size:38px;font-weight:1000;outline:0}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 14px}.quick button{background:#272b35;border:0;color:white;border-radius:8px;padding:12px;font-weight:1000}.nextBtn,.sendBtn{width:100%;background:linear-gradient(90deg,#2e5cff,#3972ff);border:0;color:white;border-radius:8px;padding:14px;font-size:16px;font-weight:1000}.note{font-size:11px;color:#a9afba;text-align:center;margin-top:13px;line-height:1.4}.profileCard{background:#24272e;border-radius:12px;text-align:center;padding:25px 16px;margin-bottom:18px}.bigAvatar{width:88px;height:88px;border-radius:50%;object-fit:cover;background:#333}.bigName{font-size:16px;margin-top:8px}.handle{font-size:13px;color:#a9afba}.meta{font-size:13px;color:#c0c5cf;line-height:1.9;margin-top:14px}.confirmAmount{display:flex;justify-content:center;align-items:center;gap:10px;font-size:36px;font-weight:1000;margin:20px 0}.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}.editBtn{background:#4a4e58;color:white;border:0;border-radius:8px;font-weight:1000;padding:14px}.toast{position:fixed;top:24px;left:50%;transform:translateX(-50%) translateY(-18px);background:#20242d;border:1px solid #3d4351;border-radius:14px;padding:13px 18px;display:flex;gap:12px;align-items:center;z-index:100;opacity:0;pointer-events:none;box-shadow:0 18px 55px rgba(0,0,0,.65)}.toast.show{animation:toastFade 3s ease forwards}.checkCircle{width:34px;height:34px;border-radius:50%;background:#35d072;display:grid;place-items:center}.checkCircle:after{content:"";width:15px;height:9px;border-left:4px solid white;border-bottom:4px solid white;transform:rotate(-45deg) scale(0);animation:drawCheck .55s ease forwards .15s}@keyframes drawCheck{0%{transform:rotate(-45deg) scale(0);opacity:0}60%{transform:rotate(-45deg) scale(1.15);opacity:1}100%{transform:rotate(-45deg) scale(1);opacity:1}}@keyframes toastFade{0%{opacity:0;transform:translateX(-50%) translateY(-18px)}12%{opacity:1;transform:translateX(-50%) translateY(0)}78%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(-12px)}}@media(max-width:1100px){.settings{display:none}main{margin-right:0}.packages{grid-template-columns:repeat(2,1fr)}}@media(max-width:800px){.sidebar{display:none}main{margin-left:0}.nav,.search{display:none}.bonusGrid{grid-template-columns:1fr}.packages{grid-template-columns:1fr}.heroTitle{font-size:32px}}
+
+.rbx,.robuxIcon{
+  width:24px;
+  height:24px;
+  display:inline-block;
+  position:relative;
+  vertical-align:-6px;
+  margin-right:8px;
+  background:transparent!important;
+  border:0!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+.rbx::before,.robuxIcon::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  background:#f1f3f7;
+  clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);
+}
+.rbx::after,.robuxIcon::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:8px;
+  height:8px;
+  background:#111318;
+  transform:translate(-50%,-50%);
+  border-radius:1px;
+}
+.rbx.sm,.robuxIcon.sm{
+  width:17px;
+  height:17px;
+  vertical-align:-3px;
+  margin-right:5px;
+}
+.rbx.sm::after,.robuxIcon.sm::after{
+  width:5px;
+  height:5px;
+}
+.rbx.big,.robuxIcon.big{
+  width:28px;
+  height:28px;
+  vertical-align:-7px;
+}
+.rbx.big::after,.robuxIcon.big::after{
+  width:9px;
+  height:9px;
+}
+.rbx.gold::before,.robuxIcon.gold::before{
+  background:#f7c850;
+}
+
+
+
+
+
+
+/* FINAL_PACKAGES_BALANCE_STYLE_START */
+.topBalance,.balanceTop{
+  position:relative;
+  background:rgba(26,29,37,.92)!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  border-radius:14px!important;
+  padding:9px 14px!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.25)!important;
+}
+.topActions{
+  display:flex!important;
+  gap:10px!important;
+  align-items:center!important;
+}
+.topBtn,.sendSmall{
+  background:#2a2e38!important;
+  border:1px solid #3b404d!important;
+  color:white!important;
+  border-radius:10px!important;
+  padding:9px 16px!important;
+  font-weight:1000!important;
+  cursor:pointer!important;
+}
+.topBtn.light,.sendSmall:first-of-type{
+  background:#f4f4f5!important;
+  color:#111318!important;
+}
+.final-pack-section{
+  width:min(900px,100%)!important;
+  margin:28px auto 0!important;
+}
+.final-pack-panel{
+  background:rgba(17,19,24,.78)!important;
+  border:1px solid #30343e!important;
+  border-radius:10px!important;
+  padding:18px 22px!important;
+  box-shadow:0 20px 55px rgba(0,0,0,.25)!important;
+}
+.final-pack-title{
+  font-size:26px!important;
+  font-weight:1000!important;
+  margin:30px 0 12px!important;
+  color:#fff!important;
+}
+.final-pack-row{
+  display:grid!important;
+  grid-template-columns:1fr 220px!important;
+  gap:24px!important;
+  align-items:center!important;
+  padding:13px 0!important;
+}
+.final-pack-left{
+  display:flex!important;
+  align-items:center!important;
+  gap:14px!important;
+}
+.final-pack-amount{
+  font-size:32px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  color:#fff!important;
+  min-width:130px!important;
+}
+.final-pack-old{
+  font-size:21px!important;
+  color:#737b8f!important;
+  text-decoration:line-through!important;
+  min-width:105px!important;
+}
+.final-pack-more{
+  background:#30343e!important;
+  color:white!important;
+  border-radius:999px!important;
+  padding:6px 11px!important;
+  font-size:12px!important;
+  font-weight:1000!important;
+  white-space:nowrap!important;
+}
+.final-pack-price{
+  height:52px!important;
+  background:#2b2f39!important;
+  color:#fff!important;
+  border:0!important;
+  border-radius:8px!important;
+  font-size:16px!important;
+  font-weight:1000!important;
+  cursor:pointer!important;
+}
+.final-pack-price.blue{
+  background:#2f63ff!important;
+}
+.requestBox{
+  text-align:center;
+  padding:22px;
+}
+.requestBox h2{margin:0 0 12px;font-size:24px}
+.requestBox p{color:#b7bdc8;margin:0 0 18px}
+@media(max-width:800px){
+  .final-pack-row{grid-template-columns:1fr!important}
+  .final-pack-price{width:100%!important}
+  .final-pack-left{flex-wrap:wrap!important}
+}
+/* FINAL_PACKAGES_BALANCE_STYLE_END */
+
+
+/* SEND_BUTTON_STYLE_START */
+:root{--send-robux-icon:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAaCAYAAABGiCfwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAKySURBVEhL3ZTdS1NxHIefzb2YuKm7EJaT8ibztpSd6CqH9KILxbxQTDdEXcuXLsLS9KoIlMxmCFYXpqYXkQVaBr6GKGj6H6iIqM2rTS90bVPsIj20w8RpL2APHDh8P5/zfS5+P45Mf/LUDv8IuXTwNzleMp0uBp0uRjoOypFlBkMczY6nTE1OMDU5geNZIwZDnLQWwKFlWm0UdbU1jAwPEBmpIcOcidmchUajZWR4gLraGrTaKOlnAMhCvY1KpRKr1YLdXsr62joPHz1maGg4oJOWZqKu9gFarYaWllZet3fg9/vFPCRZdHQ0H96/Ra/X09LSyouXr/D5fNIaAGq1GputGPstG07nKoWWIhYXFyFUWXd3J2q1moqKO6ysfJPGQYmPN+BwNHEiPJyr18wQikyni2FmepLLV9KZnZ0DwGot5F7VXVQqVUDX5/NR3/CEtrZ2ABITz/C5v4/kFAGXy40ioB2EiIgIADwejzgzmVLp+9hPz7ueX5qQfSMbkylVlG1sbMDuDpfLffjbCBAmD2N5eYnJqa8Bz/LyEmHyMGld5Eiyo3K8ZElJZ6msLKOysgzBKLDp2ZRWRA6UbW9vAyCTyaQRAMnnzyEYBQSjgNfrpb29Q8zk8p/r93YcKHM6V1lbWyMrM1MaAdD5ppvcvHxy8/KxWIsYGxsHQKFQkJOTjdvtxulchVBkAPeraykvt5OSkiyNgnJBMNL/qZeSkmKqqqrFeUiygYFBjMJFpqdnpFEAsbGxPG9uoqurg4WFBdLTrzM8MirmIckAXC63+D43P4/VUoDFUoBCoUCpVGKzlfBldJCEhNPk5d2k1Habubn5gB0H/q72w2zOoKa6iu9eLzJkqFRK6hsa6e3tY2cn+Mojy9i9oampl9ja8jM2Nr6vZI/fkh2WkM/sT/D/yn4AIErkblKI+xAAAAAASUVORK5CYII=');}
+.sendSmall,.topBtn.light{
+  background:#262a34!important;
+  color:#ffffff!important;
+  border:1px solid #333844!important;
+  border-radius:6px!important;
+  padding:6px 12px!important;
+  font-size:12px!important;
+  font-weight:1000!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  box-shadow:none!important;
+}
+.sendSmall::before,.topBtn.light::before{
+  content:"↥";
+  font-size:13px;
+  line-height:1;
+  color:#ffffff;
+}
+.mhTitle{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  font-size:18px!important;
+  font-weight:1000!important;
+}
+.mhTitle .robuxIcon,
+.mhTitle .rbx{
+  margin-right:0!important;
+}
+.mhTitle::before{
+  content:"";
+  width:20px;
+  height:20px;
+  display:inline-block;
+  background:transparent;
+  border:0;
+  background-image:var(--send-robux-icon);
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+}
+.mhTitle .robuxIcon,
+.mhTitle .rbx{
+  display:none!important;
+}
+/* SEND_BUTTON_STYLE_END */
+
+</style>
+
+
+
+<style id="custom-rbx-image-override">
+.rbx,.robuxIcon{
+  background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAAEECAMAAAAcbSh9AAADAFBMVEU5Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz05Oz2zaNj6AAAA/3RSTlMAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyAhIiMkJSYnKCkqKywtLi8wMTIzNDU2Nzg5Ojs8PT4/QEFCQ0RFRkdISUpLTE1O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") !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+  background-size:contain !important;
+  width:24px !important;
+  height:24px !important;
+  min-width:24px !important;
+  min-height:24px !important;
+  display:inline-block !important;
+  vertical-align:-6px !important;
+  margin-right:8px !important;
+  border:0 !important;
+  transform:none !important;
+  box-shadow:none !important;
+  opacity:1 !important;
+}
+.rbx::before,.rbx::after,.robuxIcon::before,.robuxIcon::after{
+  display:none !important;
+  content:none !important;
+}
+.rbx.sm,.robuxIcon.sm{
+  width:17px !important;
+  height:17px !important;
+  min-width:17px !important;
+  min-height:17px !important;
+  vertical-align:-3px !important;
+  margin-right:5px !important;
+}
+.rbx.big,.robuxIcon.big{
+  width:30px !important;
+  height:30px !important;
+  min-width:30px !important;
+  min-height:30px !important;
+}
+</style>
+
+</head><body>
+<header class="topbar"><div class="logo">ROBLOX</div><nav class="nav"><span>⌂ Home</span><span>♘ Charts</span><span>▣ Marketplace</span><span>♙ Create</span></nav><input class="search" placeholder="Search"><div class="topBalance"><span class="rbx"></span><span id="topBalance">162,000,000</span></div><div class="topActions"><button class="topBtn light" onclick="openSend()">Send</button><button class="topBtn" onclick="openRequest()">Request</button></div></header>
+<aside class="sidebar"><div class="userBox"><img id="sideAvatar" src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-6F94D0C0B22EC939CC4F016E6B0E35E1-Png/150/150/AvatarHeadshot/Webp/noFilter"><div><div class="userName">RoBeatsGreenSword</div><div class="userHandle">@RoBeatsGreenSword</div></div></div><div class="sideItem active">⌂ Home</div><div class="sideItem">♙ Profile</div><div class="sideItem">✉ Messages <span class="badge">500+</span></div><div class="sideItem">⚭ Friends <span class="badge">500+</span></div><div class="sideItem">♟ Avatar</div><div class="sideItem">▣ Inventory</div><div class="sideItem">⇄ Trade</div><div class="sideItem">♧ Groups</div><div class="sideItem">▤ Blog</div><div class="sideItem">▱ Official Store</div><div class="sideItem">▭ Gift Cards</div><div class="premium">More fun for less Robux. Subscribe to Roblox Plus.<button>Get Premium</button></div><div class="event"><b>Events</b><div class="eventCard">THE HUNT<br><small>MEGA EDITION</small></div></div></aside>
+<main><section class="heroCard"><h1 class="heroTitle">Enjoy up to 25% more Robux</h1><div class="heroSub">Get more Robux on computer, web, and with<br>Roblox Premium.</div><button class="heroBtn">Get Premium</button><div class="coinArt"><div class="coinBig"></div><div class="coinSmall c1"></div><div class="coinSmall c2"></div><div class="coinSmall c3"></div></div></section><div class="packages" id="packages"></div></main>
+<aside class="settings"><h3>⚙ Settings</h3><div class="setBlock"><b>Balance</b><div class="setBalance"><span class="rbx"></span><span id="setBalance">162,000,000</span></div><button class="setBtn" onclick="editBalance()">Edit Balance</button></div><div class="setBlock profilePic"><b>Profile Picture</b><br><img id="settingsAvatar" src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-6F94D0C0B22EC939CC4F016E6B0E35E1-Png/150/150/AvatarHeadshot/Webp/noFilter"><button class="setBtn" onclick="document.getElementById('picInput').click()">Change Picture</button><input id="picInput" type="file" accept="image/*" hidden><div class="remove">Remove</div></div><div class="setBlock"><b>Theme</b><button class="setBtn" style="margin-top:14px">Dark ▾</button></div></aside>
+<div class="shade" id="shade"><div class="modal"><div class="mh"><div class="mhTitle">Send Robux</div><div class="mhRight"><span class="rbx sm"></span><b id="modalBalance">162,000,000</b><span class="close" onclick="closeSend()">×</span></div></div><div class="screen" id="searchScreen"><div class="label">Enter the username of the recipient</div><input id="usernameInput" class="input" placeholder="Search by username" autocomplete="off"><div class="friendsTitle">My friends (78)</div><div id="results"></div></div><div class="screen hidden" id="amountScreen"><div id="selectedMini"></div><div class="label">Enter amount</div><div class="amountBox"><button onclick="changeAmount(-25)">−</button><div class="amountMain"><span class="rbx"></span><input id="amountInput" class="amountInput" value="0" inputmode="numeric"></div><button onclick="changeAmount(25)">+</button></div><div class="quick"><button onclick="setAmount(25)"><span class="rbx sm"></span>25</button><button onclick="setAmount(50)"><span class="rbx sm"></span>50</button><button onclick="setAmount(100)"><span class="rbx sm"></span>100</button><button onclick="setAmount(200)"><span class="rbx sm"></span>200</button></div><button class="nextBtn" onclick="openConfirm()">Next</button><div class="note">Robux are sent instantly with no fees</div></div><div class="screen hidden" id="confirmScreen"><div class="profileCard"><img id="confirmAvatar" class="bigAvatar"><div id="confirmName" class="bigName"></div><div id="confirmHandle" class="handle"></div><div class="meta">▣ New Connection<br>⚭ 0 Mutual Connections<br>◷ Joined in <span id="joinedYear">2020</span></div></div><div style="color:#c8ccd5;margin-bottom:6px">You are sending</div><div class="confirmAmount"><span class="rbx"></span><span id="confirmAmount">0</span></div><div class="actions"><button class="sendBtn" onclick="sendRobux()">Send</button><button class="editBtn" onclick="backToAmount()">Edit</button></div><div class="note">You need an age check or parental consent to send Robux. Once you send, you cannot cancel.</div></div></div></div><div class="toast" id="toast"><div class="checkCircle"></div><div><b>Sent!</b><br><span style="font-size:12px;color:#c8ccd6">Robux will arrive in 2 days</span></div></div>
+<script>
+let balance=162000000, selectedUser=null;const fallbackAvatar="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-6F94D0C0B22EC939CC4F016E6B0E35E1-Png/150/150/AvatarHeadshot/Webp/noFilter";const friends=[{name:"RoBeatsGreenSword",avatar:fallbackAvatar},{name:"Legoboi123_RBX",avatar:fallbackAvatar},{name:"asiiim16",avatar:fallbackAvatar},{name:"Sh4rk",avatar:fallbackAvatar},{name:"BOMBARATT",avatar:fallbackAvatar}];function fmt(n){return String(Math.max(0,Number(n)||0)).replace(/\B(?=(\d{3})+(?!\d))/g,",")}function updateBalance(){topBalance.textContent=fmt(balance);modalBalance.textContent=fmt(balance);setBalance.textContent=fmt(balance)}function editBalance(){const v=prompt("Balance:",balance);if(v!==null){balance=Number(String(v).replace(/[^0-9]/g,""))||0;updateBalance()}}picInput.addEventListener("change",e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{settingsAvatar.src=r.result;sideAvatar.src=r.result};r.readAsDataURL(f)});function clean(v){return String(v||"").replace(/[^a-zA-Z0-9_]/g,"").slice(0,24)}function year(){return 2017+Math.floor(Math.random()*9)}function drawPackages(){const p=[["400","$4.99"],["800","$9.99"],["1,700","$19.99"],["4,500","$49.99"],["10,000","$99.99"],["22,500","$199.99"]];packages.innerHTML=p.map((x,i)=>`<div class="pack"><div class="icon"><span class="rbx gold"></span></div><div class="packAmt">${x[0]}</div>${i>1?'<span class="more">15% More</span>':'<br>'}<button class="price">${x[1]}</button></div>`).join("")}function openSend(){shade.style.display="flex";showSearch();usernameInput.focus()}function closeSend(){shade.style.display="none"}function showSearch(){searchScreen.classList.remove("hidden");amountScreen.classList.add("hidden");confirmScreen.classList.add("hidden");renderResults(friends)}function renderResults(list){window.currentResults=list;results.innerHTML=list.map((u,i)=>`<div class="resultCard" onclick="selectUser(${i})"><img class="avatar" src="${u.avatar}"><div><div class="resultName">${u.name}</div><div class="resultHandle">@${u.name}</div></div><div class="arrowCircle">›</div></div>`).join("")}let timer=null;usernameInput.addEventListener("input",()=>{const q=clean(usernameInput.value);if(q!==usernameInput.value)usernameInput.value=q;clearTimeout(timer);if(q.length<3){renderResults(friends);return}results.innerHTML='<div class="noResults">Searching Roblox...</div>';timer=setTimeout(async()=>{let users=[];try{const r=await fetch("/api/roblox-users?username="+encodeURIComponent(q),{cache:"no-store"});const j=await r.json();users=j.users||[]}catch(e){}if(!users.length)users=[{name:q,avatar:fallbackAvatar}];renderResults(users)},350)});function selectUser(i){selectedUser=window.currentResults[i];selectedMini.innerHTML=`<div class="resultCard"><img class="avatar" src="${selectedUser.avatar}"><div><div class="resultName">${selectedUser.name}</div><div class="resultHandle">@${selectedUser.name}</div></div></div>`;amountInput.value="0";searchScreen.classList.add("hidden");amountScreen.classList.remove("hidden");confirmScreen.classList.add("hidden");amountInput.focus()}function changeAmount(d){let v=Number(String(amountInput.value).replace(/[^0-9]/g,""))||0;v=Math.max(0,Math.min(balance,v+d));amountInput.value=v}function setAmount(v){amountInput.value=Math.min(balance,v)}amountInput.addEventListener("input",()=>{let v=Number(String(amountInput.value).replace(/[^0-9]/g,""))||0;if(v>balance)v=balance;amountInput.value=v});function openConfirm(){if(!selectedUser)return;confirmAvatar.src=selectedUser.avatar;confirmName.textContent=selectedUser.name;confirmHandle.textContent="@"+selectedUser.name;joinedYear.textContent=year();confirmAmount.textContent=fmt(amountInput.value);amountScreen.classList.add("hidden");confirmScreen.classList.remove("hidden")}function backToAmount(){confirmScreen.classList.add("hidden");amountScreen.classList.remove("hidden")}function sendRobux(){balance=Math.max(0,balance-(Number(amountInput.value)||0));updateBalance();closeSend();toast.classList.remove("show");void toast.offsetWidth;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),3000)}drawPackages();updateBalance();
+</script>
+<script id="roblox-user-fallback-fix">
+(function(){
+  function fallbackAvatar(name){
+    const seed = encodeURIComponent(name || "Roblox");
+    return "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=" + seed;
+  }
+
+  window.makeFallbackRobloxUser = function(name){
+    const clean = String(name || "RobloxUser").replace(/[^a-zA-Z0-9_]/g,"").slice(0,24) || "RobloxUser";
+    return {
+      id: "fallback-" + clean,
+      name: clean,
+      displayName: clean,
+      handle: "@" + clean,
+      avatar: fallbackAvatar(clean),
+      amount: "0",
+      meta: "Joined in " + (2017 + Math.floor(Math.random()*9))
+    };
+  };
+
+  async function searchUsersSafe(name){
+    const q = String(name || "").replace(/[^a-zA-Z0-9_]/g,"").slice(0,24);
+    if(q.length < 3) return [];
+    try{
+      const res = await fetch("/api/roblox-users?username=" + encodeURIComponent(q), {cache:"no-store"});
+      const data = await res.json();
+      const users = data.users || [];
+      if(users.length) return users;
+    }catch(e){}
+    return [window.makeFallbackRobloxUser(q)];
+  }
+
+  const input = document.getElementById("usernameInput") || document.getElementById("friendSearch");
+  const results = document.getElementById("results") || document.getElementById("instantResult");
+
+  if(input && results){
+    let t = null;
+    input.addEventListener("input", function(){
+      const q = String(input.value || "").replace(/[^a-zA-Z0-9_]/g,"").slice(0,24);
+      if(input.value !== q) input.value = q;
+      clearTimeout(t);
+      if(q.length < 3) return;
+      results.innerHTML = '<div class="noResults">Searching Roblox...</div>';
+      t = setTimeout(async function(){
+        const users = await searchUsersSafe(q);
+
+        if(typeof renderResults === "function"){
+          renderResults(users);
+          return;
+        }
+
+        window.currentSearchResults = users.map(u=>({
+          name:u.name,
+          handle:u.handle || ("@"+u.name),
+          meta:u.meta || "",
+          avatar:u.avatar,
+          amount:"0",
+          robloxId:u.id
+        }));
+
+        window.currentResults = users;
+
+        results.innerHTML = users.map((u,i)=>`
+          <div class="resultCard" onclick="${typeof selectProfile === 'function' ? 'selectProfile' : 'selectUser'}(${i})">
+            <img class="resultAvatar avatar" src="${u.avatar}">
+            <div>
+              <div class="resultName">${u.name}</div>
+              <div class="resultHandle">@${u.name}</div>
+            </div>
+          </div>
+        `).join("");
+      }, 300);
+    }, true);
+  }
+})();
+</script>
+
+
+
+
+
+<script id="final-packages-override">
+(function(){
+  function row(amount, oldAmount, more, price, blue){
+    return `
+      <div class="final-pack-row">
+        <div class="final-pack-left">
+          <span class="rbx"></span>
+          <span class="final-pack-amount">${amount}</span>
+          <span class="final-pack-old"><span class="rbx sm"></span>${oldAmount}</span>
+          <span class="final-pack-more">${more}</span>
+        </div>
+        <button class="final-pack-price ${blue ? 'blue' : ''}">${price}</button>
+      </div>
+    `;
+  }
+
+  function applyFinalPackages(){
+    const target =
+      document.getElementById("packages") ||
+      document.querySelector(".packages") ||
+      document.getElementById("packRows") ||
+      document.querySelector(".packRows");
+
+    if(!target) return;
+
+    target.className = "final-pack-section";
+    target.style.display = "block";
+    target.innerHTML = `
+      <div class="final-pack-panel">
+        ${row("24,000","22,500","+ 1500 more","94,99 E Ft",false)}
+        ${row("11,000","10,000","+ 1000 more","47,99 E Ft",false)}
+        ${row("5,250","4,500","+ 750 more","23,99 E Ft",false)}
+        ${row("3,625","3,150","+ 475 more","14,99 E Ft",false)}
+        ${row("2,000","1,700","+ 300 more","9490 Ft",true)}
+      </div>
+
+      <div class="final-pack-title">Robux packages</div>
+      <div class="final-pack-panel">
+        ${row("1,500","1,200","+ 300 more","6990 Ft",false)}
+        ${row("1,000","800","+ 200 more","4490 Ft",false)}
+        ${row("500","400","+ 100 more","2490 Ft",false)}
+      </div>
+    `;
+  }
+
+  window.drawPackages = applyFinalPackages;
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", applyFinalPackages);
+  }else{
+    applyFinalPackages();
+  }
+  setTimeout(applyFinalPackages,100);
+  setTimeout(applyFinalPackages,600);
+})();
+
+function openRequest(){
+  const shade = document.getElementById("shade") || document.getElementById("modal");
+  if(!shade){
+    alert("Request opened");
+    return;
+  }
+  shade.style.display = "flex";
+  const search = document.getElementById("searchScreen");
+  const amount = document.getElementById("amountScreen");
+  const confirm = document.getElementById("confirmScreen");
+  if(search){
+    search.classList.remove("hidden");
+    search.innerHTML = `
+      <div class="requestBox">
+        <h2>Request Robux</h2>
+        <p>Request GUI opened successfully.</p>
+        <input class="input" placeholder="Username">
+        <br><br>
+        <button class="nextBtn" onclick="closeSend ? closeSend() : closeModal()">Done</button>
+      </div>
+    `;
+  }
+  if(amount) amount.classList.add("hidden");
+  if(confirm) confirm.classList.add("hidden");
+}
+</script>
+
+</body></html>
